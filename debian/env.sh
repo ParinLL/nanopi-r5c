@@ -6,11 +6,12 @@ media='mmc_2g.img' # or block device '/dev/sdX'
 deb_dist='bookworm'
 acct_uid='debian'
 acct_pass='debian'
-extra_pkgs='curl, pciutils, sudo, unzip, wget, xxd, xz-utils, zip, zstd'
-hostname_pattern='nanopi-MODEL-arm64'
-kernel_fw_url="https://mirrors.edge.kernel.org/pub/linux/kernel/firmware/linux-firmware-20230210.tar.xz"
-kernel_fw_sha256="6e3d9e8d52cffc4ec0dbe8533a8445328e0524a20f159a5b61c2706f983ce38a"
-release_url="https://github.com/inindev/nanopi-r5/releases/download/v12.0.1"
+extra_pkgs='curl, pciutils, sudo, unzip, wget, xxd, xz-utils, zip, zstd, htop, iftop, jq, yq, ca-certificates, neovim, lm-sensors, dnsutils'
+hostname_pattern='nanopi-R5C-arm64'
+# docker host $ python3 -m http.server 80
+kernel_fw_url="http://172.17.0.1"
+kernel_fw_sha256="a12cb38f4793394bf56c6702be29b6e4f09deca0714943bba98a492030651570"
+release_url="https://github.com/inindev/nanopi-r5/releases/download/v12.0.3"
 
 rst='\033[m'
 bld='\033[1m'

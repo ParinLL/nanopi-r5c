@@ -8,11 +8,13 @@ WORKDIR /root
 ADD env.sh tools.sh ./
 COPY common/files files/
 RUN mkdir steps
+ADD steps/change_mirror.sh steps/
+RUN sh steps/change_mirror.sh
 ADD steps/init_builder_A.sh steps/
 RUN sh steps/init_builder_A.sh
 ADD steps/download.sh steps/
-RUN sh steps/download.sh "${KERNEL_FW_URL}" "${KERNEL_FW_SHA256}"
-RUN sh steps/download.sh "${RELEASE_URL}/rk3568-nanopi-${MODEL}.dtb"
+RUN sh steps/download.sh "${KERNEL_FW_URL}/linux-firmware-20250109.tar.xz"
+RUN sh steps/download.sh "${KERNEL_FW_URL}/rk3568-nanopi-r5c.dtb"
 ADD steps/configure_files.sh steps/
 RUN sh steps/configure_files.sh "${MODEL}"
 ADD steps/install_firmware.sh steps/
@@ -29,6 +31,10 @@ ADD env.sh tools.sh ./
 RUN mkdir steps
 ADD steps/create_user.sh steps/
 RUN sh steps/create_user.sh
+# ADD steps/install_docker.sh steps/
+# RUN sh steps/install_docker.sh
+# ADD steps/install_nerdctl.sh steps/
+# RUN sh steps/install_nerdctl.sh
 RUN rm -rf env.sh tools.sh steps    # cleanup
 RUN rm -rf /var/cache/* /var/lib/apt/lists/*   # discard the cache
 
@@ -42,6 +48,8 @@ WORKDIR /root
 COPY nanopi-${MODEL}/files files/
 ADD env.sh tools.sh ./
 RUN mkdir steps
+ADD steps/change_mirror.sh steps/
+RUN sh steps/change_mirror.sh
 ADD steps/init_builder_B.sh steps/
 RUN sh steps/init_builder_B.sh
 ADD steps/download.sh steps/

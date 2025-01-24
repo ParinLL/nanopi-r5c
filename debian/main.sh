@@ -108,9 +108,9 @@ if $compress && [ -f "$media_path.xz" ]; then
     fi
 fi
 
-print_hdr "starting docker build"
-
-docker build --progress=plain \
+print_hdr "starting docker buildx build"
+BUILDKIT_PROGRESS=plain
+docker buildx build --progress=plain \
              -t "$docker_image_name" \
              --build-arg MODEL="$model" \
              --build-arg PARAMS="$@" \
@@ -139,7 +139,7 @@ elif [ -b "$media_path" ]; then
     fetch_image_file "$docker_image_name" "$media_path"
     echo "\n${cya}media is now ready${rst}"
 else
-    print_hdr "retrieving image file from docker build env"
+    print_hdr "retrieving image file from docker buildx build env"
     fetch_image_file "$docker_image_name" "$media_path"
     echo "\n${cya}image is now ready${rst}"
     echo "\n${cya}copy image to media:${rst}"

@@ -13,4 +13,4 @@ pkgs="linux-image-arm64, dbus, dhcpcd, libpam-systemd, openssh-server, systemd-t
 pkgs="$pkgs, rfkill, wireless-regdb, wpasupplicant"
 pkgs="$pkgs, $extra_pkgs"
 debootstrap --foreign --arch arm64 --include "$pkgs" --exclude "isc-dhcp-client" \
-    "$deb_dist" "rootfs" 'https://deb.debian.org/debian/'
+    "$deb_dist" "rootfs" 'https://mirror.twds.com.tw/debian/'
